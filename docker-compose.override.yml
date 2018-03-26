@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  vstsdockerbuild.webapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:80"

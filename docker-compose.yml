@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  vstsdockerbuild.webapp:
+    image: vstsdockerbuild.webapp
+    build:
+      context: .
+      dockerfile: src/VstsDockerBuild.WebApp/Dockerfile
