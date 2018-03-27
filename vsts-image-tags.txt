@@ -1,0 +1,3 @@
+vstsdockerbuild.webapp:latest
+vstsdockerbuild.pongservice:latest
+
