@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  vstsdockerbuild.webapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - PongService=http://vstsdockerbuild.pongservice
+    ports:
+      - "80"
+    depends_on:
+      - vstsdockerbuild.pongservice
+    logging:
+      driver: "none"
+
+  vstsdockerbuild.pongservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+    logging:
+      driver: "none"
+  
+  vstsdockerbuild.integrationtests:
+    image: vstsdockerbuild.integrationtests
+    build:
+      context: .
+      dockerfile: tests/VstsDockerBuild.IntegrationTests/Dockerfile
+    entrypoint: dotnet test
+    environment:
+      - PongService=http://vstsdockerbuild.pongservice
+      - WebApp=http://vstsdockerbuild.webapp
+    depends_on:
+      - vstsdockerbuild.pongservice
+      - vstsdockerbuild.webapp
+    
