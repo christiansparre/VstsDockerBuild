@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  vstsdockerbuild.webapp:
+    image: sparreio.azurecr.io/vstsdockerbuild.webapp
+   
+  vstsdockerbuild.pongservice:
+    image: sparreio.azurecr.io/vstsdockerbuild.pongservice
