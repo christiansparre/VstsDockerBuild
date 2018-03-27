@@ -2,6 +2,7 @@ version: '3'
 
 services:
   vstsdockerbuild.webapp:
+    image: vstsdockerbuild.webapp
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - PongService=http://vstsdockerbuild.pongservice
@@ -13,6 +14,7 @@ services:
       driver: "none"
 
   vstsdockerbuild.pongservice:
+    image: vstsdockerbuild.pongservice
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
