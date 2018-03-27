@@ -4,5 +4,15 @@ services:
   vstsdockerbuild.webapp:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - PongService=http://vstsdockerbuild.pongservice
     ports:
       - "8080:80"
+    depends_on:
+      - vstsdockerbuild.pongservice
+
+  vstsdockerbuild.pongservice:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

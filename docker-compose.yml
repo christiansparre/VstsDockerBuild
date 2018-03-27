@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: src/VstsDockerBuild.WebApp/Dockerfile
+
+  vstsdockerbuild.pongservice:
+    image: vstsdockerbuild.pongservice
+    build:
+      context: .
+      dockerfile: src/VstsDockerBuild.PongService/Dockerfile
+
