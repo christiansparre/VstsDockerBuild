@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  vstsdockerbuild.tests:
+    image: vstsdockerbuild.tests
+    build:
+      context: .
+      dockerfile: tests/VstsDockerBuild.Tests/Dockerfile
+    entrypoint: dotnet test
