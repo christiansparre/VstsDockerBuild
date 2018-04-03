@@ -6,6 +6,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - PongService=http://vstsdockerbuild.pongservice
+      - BLOWUP
     ports:
       - "80"
     depends_on:

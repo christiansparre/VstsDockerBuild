@@ -8,4 +8,6 @@ services:
     build:
       context: .
       dockerfile: tests/VstsDockerBuild.Tests/Dockerfile
-    entrypoint: dotnet test
+    entrypoint: dotnet test --logger trx --results-directory /var/temp
+    volumes:
+      - /opt/vsts/work/_temp:/var/temp

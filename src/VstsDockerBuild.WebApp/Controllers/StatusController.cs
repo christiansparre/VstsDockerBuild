@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace VstsDockerBuild.WebApp.Controllers
 {
@@ -7,6 +8,12 @@ namespace VstsDockerBuild.WebApp.Controllers
         [HttpGet("status")]
         public IActionResult Status()
         {
+            var blowUp = Environment.GetEnvironmentVariable("BLOWUP");
+            if (blowUp != null && blowUp == "yes")
+            {
+                return StatusCode(500);
+            }
+            
             return Ok("All is right in the world");
         }
     }
