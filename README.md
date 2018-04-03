@@ -18,7 +18,8 @@ So here I have set up a more complete sample solution that
 1. Runs a number of empty unit tests
 1. Runs a few integration tests
 
-See: TODO, link to blog posts, for more detailed description of the setup in VSTS
+See:
+Post 1: https://medium.com/@christiansparre/building-a-multi-docker-image-solution-using-visual-studio-team-services-and-docker-compose-42fa196b6cd2
 
 I think the most interesting thing and one of the huge value propositions for docker, besides the general awesomeness, is how easy it actually is to setup integration tests of a complete solution. It does not involve deployment, it can easily run as part of your build pipeline and it can include everything from your own application to database servers etc.
 
