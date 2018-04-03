@@ -8,6 +8,12 @@ namespace VstsDockerBuild.Tests
         [Fact]
         public void Test1()
         {
+            var blowUp = Environment.GetEnvironmentVariable("BLOWUP");
+
+            if (blowUp != null)
+            {
+                Assert.NotEqual("yes", blowUp);
+            }
 
         }
 

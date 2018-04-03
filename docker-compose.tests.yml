@@ -2,6 +2,8 @@ version: '3'
 
 services:
   vstsdockerbuild.tests:
+    environment: 
+      - BLOWUP
     image: vstsdockerbuild.tests
     build:
       context: .
