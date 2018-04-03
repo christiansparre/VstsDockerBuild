@@ -7,7 +7,7 @@ services:
   vstsdockerbuild.pongservice:
     image: sparreio.azurecr.io/vstsdockerbuild.pongservice
 
-vstsdockerbuild.integrationtests:
-    entrypoint: dotnet test --logger trx --results-directory /var/temp
-    volumes:
-      - /opt/vsts/work/_temp:/var/temp
+  vstsdockerbuild.integrationtests:
+      entrypoint: dotnet test --logger trx --results-directory /var/temp
+      volumes:
+        - /opt/vsts/work/_temp:/var/temp
