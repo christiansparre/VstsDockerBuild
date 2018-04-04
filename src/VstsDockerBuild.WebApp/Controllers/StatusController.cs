@@ -8,7 +8,7 @@ namespace VstsDockerBuild.WebApp.Controllers
         [HttpGet("status")]
         public IActionResult Status()
         {
-            var blowUp = Environment.GetEnvironmentVariable("BLOWUP");
+            var blowUp = Environment.GetEnvironmentVariable("BLOWUPINTEGRATION");
             if (blowUp != null && blowUp == "yes")
             {
                 return StatusCode(500);

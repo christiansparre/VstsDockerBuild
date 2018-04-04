@@ -6,7 +6,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - PongService=http://vstsdockerbuild.pongservice
-      - BLOWUP
+      - BLOWUPINTEGRATION
     ports:
       - "80"
     depends_on:
@@ -18,10 +18,13 @@ services:
     image: vstsdockerbuild.pongservice
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MongoDB=mongodb://mongo/Ping-Events
     ports:
       - "80"
     logging:
       driver: "none"
+    depends_on:
+      - mongo
   
   vstsdockerbuild.integrationtests:
     image: vstsdockerbuild.integrationtests
@@ -32,7 +35,14 @@ services:
     environment:
       - PongService=http://vstsdockerbuild.pongservice
       - WebApp=http://vstsdockerbuild.webapp
+      - MongoDB=mongodb://mongo/Ping-Events
     depends_on:
       - vstsdockerbuild.pongservice
       - vstsdockerbuild.webapp
+      - mongo
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017"
     
