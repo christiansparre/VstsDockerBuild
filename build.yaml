@@ -1,0 +1,68 @@
+# Build definition used in the sample
+queue:
+  name: Hosted Linux Preview
+steps:
+- task: DockerCompose@0
+  displayName: 'Build and tag images'
+  inputs:
+    azureSubscription: '<<Azure Subscription Name>>'
+
+    azureContainerRegistry: '{"loginServer":"<<ACR Login server>>azurecr.io", "id" : "<<ACR id>>"}'
+
+    action: 'Build services'
+
+    additionalImageTags: '$(Build.BuildNumber)'
+
+    includeLatestTag: true
+
+
+- task: DockerCompose@0
+  displayName: 'Run unit tests'
+  inputs:
+    containerregistrytype: 'Container Registry'
+
+    dockerComposeFile: 'docker-compose.tests.yml'
+
+    qualifyImageNames: false
+
+    dockerComposeCommand: 'up --abort-on-container-exit'
+
+
+- task: DockerCompose@0
+  displayName: 'Run integration tests'
+  inputs:
+    azureSubscription: '<<Azure Subscription Name>>'
+
+    azureContainerRegistry: '{"loginServer":"<<ACR Login server>>azurecr.io", "id" : "<<ACR id>>"}'
+
+    dockerComposeFile: 'docker-compose.integration-tests.yml'
+
+    additionalDockerComposeFiles: 'docker-compose.integration-tests-vsts.yml'
+
+    qualifyImageNames: false
+
+    dockerComposeCommand: 'up --abort-on-container-exit'
+
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testRunner: VSTest
+
+    testResultsFiles: '*.trx'
+
+    searchFolder: '/opt/vsts/work/_temp'
+
+  continueOnError: true
+  condition: succeededOrFailed()
+
+- task: DockerCompose@0
+  displayName: 'Push images'
+  inputs:
+    azureSubscription: '<<Azure Subscription Name>>'
+
+    azureContainerRegistry: '{"loginServer":"<<ACR Login server>>azurecr.io", "id" : "<<ACR id>>"}'
+
+    action: 'Push services'
+
+    additionalImageTags: '$(Build.BuildNumber)'
