@@ -15,6 +15,7 @@ namespace VstsDockerBuild.WebApp
         public static void Main(string[] args)
         {
             BuildWebHost(args).Run();
+	    var i = 0;
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
